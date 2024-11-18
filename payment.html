@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - BookMyMovie</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>BOOK<span class="highlight">myMOVIE</span></h1>
+    </div>
+
+    <div class="payment-container">
+        <h2>Select Payment Method</h2>
+        <button onclick="selectPayment('UPI')">UPI</button>
+        <button onclick="selectPayment('Net Banking')">Net Banking</button>
+        <button onclick="selectPayment('Google Pay')">Google Pay</button>
+        <button onclick="selectPayment('PhonePe')">PhonePe</button>
+        <button onclick="selectPayment('Bharat Pay')">Bharat Pay</button>
+    </div>
+
+    <div id="pay-now-container" style="display:none; text-align:center;">
+        <button onclick="generateInvoice()">Pay Now</button>
+    </div>
+
+    <div id="invoice" class="invoice" style="display:none;">
+        <div class="invoice-header">
+            <h3>Movie Ticket Invoice</h3>
+            <img src="spiderman.jpeg" alt="Movie Poster" class="movie-poster">
+        </div>
+        <p id="username">Name: <span>Chandrakant Tripathi</span></p>
+        <p>Movie: <span id="movie-name">Spider-Man</span></p>
+        <p>Show Timing: <span id="show-timing">7:00 PM</span></p>
+        <p>Seat(s) Selected: <span id="seats">A1, A2</span></p>
+        <p>Subtotal: $<span id="subtotal">20</span></p>
+        <p>Tax (2%): $<span id="tax"></span></p>
+        <p>Total: $<span id="total"></span></p>
+        <p class="non-transferable">This ticket is non-transferable.</p>
+    </div>
+
+    <script>
+        let selectedPaymentMethod = "";
+
+        // Function to select a payment method
+        function selectPayment(paymentMethod) {
+            selectedPaymentMethod = paymentMethod;
+            document.getElementById("pay-now-container").style.display = "block"; // Show Pay Now button
+        }
+
+        // Function to generate and display the invoice
+        function generateInvoice() {
+            // Sample data - replace with actual dynamic data from the selection
+            const username = "Chandrakant Tripathi"; 
+            const movieName = "Spider-Man";
+            const showTime = "7:00 PM";
+            const seats = ["34", "45", "35"];  // Dynamic seats selected
+            const seatPrice = 10;
+            const subtotal = seats.length * seatPrice;
+            const tax = subtotal * 0.02;
+            const total = subtotal + tax;
+
+            // Display details in the invoice
+            document.getElementById("username").innerText = `Name: ${username}`;
+            document.getElementById("movie-name").innerText = movieName;
+            document.getElementById("show-timing").innerText = showTime;
+            document.getElementById("seats").innerText = seats.join(", ");
+            document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+            document.getElementById("tax").innerText = tax.toFixed(2);
+            document.getElementById("total").innerText = total.toFixed(2);
+
+            // Show the invoice and alert
+            document.getElementById("invoice").style.display = "block";
+            alert(`Payment method: ${selectedPaymentMethod}\nNote: This ticket is non-transferable.`);
+        }
+    </script>
+</body>
+</html>

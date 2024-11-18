@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection - BookMyMovie</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>BOOK<span class="highlight">myMOVIE</span></h1>
+    </div>
+
+    <div class="seat-selection-container">
+        <h2>Select Your Seat</h2>
+        <div class="seat-matrix" id="seat-matrix">
+            <!-- Seats will be generated here by JavaScript -->
+        </div>
+        <p>Total: $<span id="total-price">0</span></p>
+        <button id="pay-now" class="pay-now" onclick="payNow()">Pay Now</button>
+    </div>
+
+    <script>
+        // JavaScript for generating seats and handling selection
+        const seatMatrix = document.getElementById("seat-matrix");
+        const totalPriceDisplay = document.getElementById("total-price");
+        const seatPrice = 10; // Seat price in dollars
+        let selectedSeats = [];
+
+        // Generate 65 seats with numbers
+        for (let i = 1; i <= 65; i++) {
+            const seatContainer = document.createElement("div");
+            seatContainer.classList.add("seat-container");
+
+            const seat = document.createElement("div");
+            seat.classList.add("seat");
+            seat.textContent = i;  // Seat number displayed
+
+            const seatMessage = document.createElement("p");
+            seatMessage.classList.add("seat-message");
+            seatMessage.textContent = "";  // Seat message (e.g., "Seat Booked")
+            
+            // Randomly mark some seats as booked
+            if (Math.random() > 0.7) {
+                seat.classList.add("booked");
+                seat.onclick = showBookedPopup;
+            } else {
+                seat.onclick = () => toggleSeat(seat, seatMessage);
+            }
+
+            seatContainer.appendChild(seat);
+            seatContainer.appendChild(seatMessage);
+            seatMatrix.appendChild(seatContainer);
+        }
+
+        // Toggle seat selection and calculate total price
+        function toggleSeat(seat, message) {
+            if (!seat.classList.contains("booked")) {
+                seat.classList.toggle("selected");
+                if (seat.classList.contains("selected")) {
+                    selectedSeats.push(seat);
+                    message.textContent =  "Booked";
+                } else {
+                    selectedSeats = selectedSeats.filter(s => s !== seat);
+                    message.textContent = "";
+                }
+                updateTotalPrice();
+            }
+        }
+
+        // Update total price based on selected seats
+        function updateTotalPrice() {
+            const totalPrice = selectedSeats.length * seatPrice;
+            totalPriceDisplay.textContent = totalPrice;
+        }
+
+        // Show popup for booked seats
+        function showBookedPopup() {
+            const popup = document.getElementById("popup");
+            popup.style.display = "block";
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 1000);
+        }
+
+        // Redirect to payment page
+        function payNow() {
+            if (selectedSeats.length > 0) {
+                window.location.href = "payment.html";  // Redirects to payment page
+            } else {
+                alert("Please select at least one seat to proceed.");
+            }
+        }
+    </script>
+</body>
+</html>

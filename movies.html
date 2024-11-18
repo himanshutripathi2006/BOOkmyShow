@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies - Cinema Plus</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .movie-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .movie {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 180px;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .movie:hover {
+        transform: translateY(-10px);
+      }
+
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .seat-container {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .seat {
+        width: 30px;
+        height: 30px;
+        background-color: #4caf50;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .seat.selected {
+        background-color: #ff6347;
+      }
+
+      .price {
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      .payment-button {
+        margin-top: 20px;
+        padding: 12px 24px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .payment-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Choose Your Movie</h1>
+
+    <!-- Movie Selection -->
+    <div class="movie-container">
+      <div class="movie">
+        <img src="movie1.jpg" alt="Movie 1" />
+        <h3>Movie 1</h3>
+        <p>2D</p>
+        <button onclick="selectMovie('Movie 1', 350, '2D')">Select</button>
+      </div>
+      <div class="movie">
+        <img src="movie2.jpg" alt="Movie 2" />
+        <h3>Movie 2</h3>
+        <p>3D</p>
+        <button onclick="selectMovie('Movie 2', 450, '3D')">Select</button>
+      </div>
+      <div class="movie">
+        <img src="movie3.jpg" alt="Movie 3" />
+        <h3>Movie 3</h3>
+        <p>2D</p>
+        <button onclick="selectMovie('Movie 3', 350, '2D')">Select</button>
+      </div>
+    </div>
+
+    <!-- Seat Booking -->
+    <div class="seat-container">
+      <h3>Select Seats</h3>
+      <div id="seats">
+        <!-- Seats will appear here dynamically -->
+      </div>
+
+      <Here is the completed version of your online movie ticket booking system, including login functionality, movie display, seat booking, and payment option.
+
+#### 1. **Login Page** - `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cinema Plus</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #f06, #f79);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #root {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      label {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 12px;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <h1>Welcome to Cinema Plus</h1>
+
+      <!-- Login Form -->
+      <div class="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter Username" />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter Password" />
+
+        <button onclick="login()">Login</button>
+      </div>
+    </div>
+
+    <script>
+      // Login functionality
+      function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (username === "student" && password === "vitap") {
+          alert("Login successful!");
+          window.location.href = "movies.html"; // Redirect to movie selection page
+        } else {
+          alert("Incorrect username or password. You can't enter the theatre.");
+        }
+      }
+    </script>
+  </body>
+</html>
